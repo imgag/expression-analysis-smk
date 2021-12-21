@@ -1,6 +1,6 @@
 samples: metadata.tsv
 contrasts: contrasts.tsv
-annotation: 
+annotation: na.tsv # use auto generated annotation
 
 build: grch38
 annotation_gene_id: gene_id
@@ -39,3 +39,8 @@ colormaps:
   group: tab10
   clustermap: RdBu
   heatmap: RdYlBu
+
+pca:
+  hue: group # only group possible right now
+  style:
+  label:

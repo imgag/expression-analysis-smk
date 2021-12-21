@@ -1,6 +1,6 @@
 samples: metadata.tsv
 contrasts: contrasts.tsv
-annotation: 
+annotation: na.tsv # use auto generated annotation
 
 cpm_filter:
   min_count: 10
