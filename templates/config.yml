@@ -3,7 +3,7 @@ contrasts: contrasts.tsv
 annotation: na.tsv # use auto generated annotation
 
 build: grch38
-annotation_gene_id: gene_id
+annotation_gene_id: ensgene
 annotation_columns:
   - ensgene
   - symbol
