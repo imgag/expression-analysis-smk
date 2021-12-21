@@ -1,0 +1,34 @@
+samples: metadata.tsv
+contrasts: contrasts.tsv
+annotation: 
+
+cpm_filter:
+  min_count: 10
+  min_total_count: 15
+
+factors: {}
+
+model: 
+
+de_filter:
+  fdr: 0.05
+  logfc: 0
+  pvalue: 1
+
+boxplot: []
+
+exclude_genes: []
+
+exclude_genes_not_matching: []
+
+pca:
+  hue: group # only group possible right now
+  style:
+  label:
+
+colormaps:
+  group: Accent
+  clustermap: RdBu
+  heatmap: RdBu
+
+heatmap_n_genes: 50

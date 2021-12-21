@@ -1,0 +1,79 @@
+import sys
+import pandas as pd
+
+
+configfile: srcdir("defaults.yml")
+configfile: "config.yml"
+
+# preflight_check
+metadata = pd.read_csv(config["samples"], sep="\t")
+for required_col in set(["sample", "group", "file"] + list(config["factors"].keys())):
+    if required_col not in metadata.columns:
+        print(f"Missing column in metadata file: '{required_col}'")
+        sys.exit(2)
+    assert required_col in metadata.columns
+assert not metadata["sample"].duplicated().any()
+
+if config["contrasts"]:
+    contrasts = pd.read_csv(config["contrasts"], sep="\t")
+    for required_col in ["name", "title", "description", "coefficients"]:
+        if required_col not in contrasts.columns:
+            print(f"Missing column in contrasts file: '{required_col}'")
+            sys.exit(2)
+        assert required_col in contrasts.columns
+    assert not contrasts["name"].duplicated().any()
+
+
+if config["contrasts"]:
+    contrasts = pd.read_csv(config["contrasts"], sep="\t")["name"]
+else:
+    contrasts = []
+
+
+include: "rules/common.smk"
+include: "rules/annotation.smk"
+include: "rules/expr_tables.smk"
+include: "rules/expr_plots.smk"
+include: "rules/diff_expr.smk"
+
+
+rule all:
+    input:
+        rules.expr_tables.output.library_sizes,
+        rules.expr_dist.output.boxplot,
+        rules.expr_dist.output.density,
+        rules.expr_corr.output.table,
+        rules.expr_corr.output.dendrogram,
+        rules.expr_clustermap.output.clustermap,
+        expand(
+            "results/{expr}/{type}.tsv",
+            expr=["expr", "expr_annot"],
+            type=[
+                "filtered_cpm",
+                "filtered_fpkm",
+                "filtered_raw",
+                "filtered_tpm",
+                "full_cpm",
+                "full_fpkm",
+                "full_raw",
+                "full_tpm",
+            ],
+        ),
+        "results/expression.xlsx",
+        expand(
+            "results/{diff_expr}/contrast.{n}.tsv",
+            diff_expr=["diff_expr", "diff_expr_annot"],
+            n=contrasts,
+        ),
+        expand(
+            "results/diff_expr_annot/contrast.{n}.{plot}.png",
+            n=contrasts,
+            plot=["volcano", "heatmap"],
+        ),
+        rules.plot_model_stats.output.bcv_value,
+        "results/diff_expr.xlsx",
+        "results/expr/pca.tsv",
+        "results/expr/pca.png",
+        [f"results/genes/{gene}.boxplot.png" for gene in config["boxplot"]]
+        if config["boxplot"]
+        else [],

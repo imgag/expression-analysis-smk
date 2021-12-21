@@ -1,0 +1,9 @@
+name: R
+channels:
+  - r
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - r-base ==4.1.1
+  - r-renv ==0.14.0

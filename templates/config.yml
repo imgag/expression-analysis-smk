@@ -1,0 +1,41 @@
+samples: metadata.tsv
+contrasts: contrasts.tsv
+annotation: 
+
+build: grch38
+annotation_gene_id: gene_id
+annotation_columns:
+  - ensgene
+  - symbol
+  - description
+  - biotype
+
+cpm_filter:
+  min_count: 10
+  min_total_count: 15
+
+factors:
+  group:
+    - control
+    - affected
+  
+de_filter:
+  fdr: 0.05
+  logfc: 0
+  pvalue: 1
+
+model: "~ group"
+
+exclude genes:
+
+exclude_genes_not_matching:
+
+boxplot:
+  - BRCA1
+
+heatmap_n_genes: 50
+
+colormaps:
+  group: tab10
+  clustermap: RdBu
+  heatmap: RdYlBu
