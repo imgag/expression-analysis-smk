@@ -60,6 +60,8 @@ rule expr_excel:
         full_raw="results/expr_annot/full_raw.tsv",
     output:
         "results/expression.xlsx",
+    conda:
+        "../conda/excel.yml"
     script:
         "../scripts/expr_excel.py"
 

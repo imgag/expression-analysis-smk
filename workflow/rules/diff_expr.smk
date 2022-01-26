@@ -95,5 +95,7 @@ rule diff_expr_excel:
         filtered_raw=rules.expr_tables.output.filtered_raw,
     output:
         "results/diff_expr.xlsx",
+    conda:
+        "../conda/excel.yml"
     script:
         "../scripts/diff_expr_excel.py"
