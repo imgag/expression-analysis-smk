@@ -7,7 +7,7 @@ from io import StringIO
 import pandas as pd
 
 if len(sys.argv) == 2:
-    project_name = sys.argv[1]
+    project_name = Path(sys.argv[1]).resolve().name
 else:
     project_name = Path.cwd().name
 
