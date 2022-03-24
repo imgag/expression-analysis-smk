@@ -74,6 +74,7 @@ rule all:
         "results/diff_expr.xlsx",
         "results/expr/pca.tsv",
         "results/expr/pca.png",
+        "results/expr/pca_plotly.html",
         [f"results/genes/{gene}.boxplot.png" for gene in config["boxplot"]]
         if config["boxplot"]
         else [],

@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.decomposition import PCA
@@ -19,6 +20,8 @@ X_pca_df["sample"] = X_pca_df.index
 
 group_colors_df = pd.read_csv(snakemake.input["group_colors"], sep="\t", index_col=0)
 group_colors_dict = dict(group_colors_df["color"])
+
+# Seaborn plot
 p = sns.scatterplot(
     x=0,
     y=1,
@@ -39,4 +42,10 @@ if snakemake.config["pca"]["label"]:
         plt.text(row[0], row[1], row[snakemake.config["pca"]["label"]], fontsize=6, color=group_colors_dict[row[snakemake.config["pca"]["hue"]]], horizontalalignment="center")
 
 plt.savefig(snakemake.output["pca_plt"], dpi=300, bbox_inches="tight")
+
+# Plotly plot
+fig = px.scatter(X_pca, x=0, y=1, color = X_pca_df['group'], text = X_pca_df.index)
+fig.update_traces(textposition='top center')
+fig.write_html(snakemake.output["pca_plotly"])
+
 X_pca_df.iloc[:, 0:n_components].to_csv(snakemake.output["pca_tbl"], sep="\t")

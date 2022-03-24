@@ -54,6 +54,7 @@ rule expr_pca:
         group_colors="intermediate/group_colors.tsv",
     output:
         pca_plt="results/expr/pca.png",
+        pca_plotly="results/expr/pca_plotly.html",
         pca_tbl="results/expr/pca.tsv",
     conda:
         "../conda/plot_sns_pca.yml"
