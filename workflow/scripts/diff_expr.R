@@ -20,6 +20,8 @@ design <-
 colnames(design) <-
   make.names(colnames(design))
 
+print(design)
+
 # estimate dispersions
 d_filtered <-
   edgeR::estimateDisp(d_filtered,

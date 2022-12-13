@@ -1,3 +1,11 @@
+build: grch38
+annotation_gene_id: ensgene
+annotation_columns:
+  - ensgene
+  - symbol
+  - description
+  - biotype
+
 samples: metadata.tsv
 contrasts: contrasts.tsv
 annotation: na.tsv # use auto generated annotation

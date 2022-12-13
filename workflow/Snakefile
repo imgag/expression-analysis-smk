@@ -3,7 +3,12 @@ import pandas as pd
 
 
 configfile: srcdir("defaults.yml")
-configfile: "config.yml"
+try: 
+    configfile: "config.yml"
+except FileNotFoundError as _:
+    print("No project config found, using default settings.")
+
+
 
 # preflight_check
 metadata = pd.read_csv(config["samples"], sep="\t")
