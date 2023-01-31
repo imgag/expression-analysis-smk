@@ -22,7 +22,7 @@ Now the dependencies should be installed, you need to repeat this step when the 
 
 ### 1) Setup project
 
-####Export metadata from NGSD into the project folder
+#### Export metadata from NGSD into the project folder
 
 ```bash
 python3 expression-analysis-smk/scripts/ngsd-project-metadata.py | cut -f1,5,6 > metadata.tsv
@@ -64,5 +64,18 @@ The contrasts file defines the group comparisons calculate in the DGE analysis. 
 ```
 snakemake --profile local -s /mnt/users/ahgrosc1/pipeline/expression-analysis-smk/workflow/Snakefile --cores 5
 ```
+
+### Available reference builds
+
+-   Human build 38 (`grch38`)
+-   Human build 37 (`grch37`)
+-   Mouse (`grcm38`)
+-   Rat (`rnor6`)
+-   Chicken (`galgal5`)
+-   Worm (`wbcel235`)
+-   Fly (`bdgp6`)
+-   Macaque (`mmul801`)
+
+Annotation based on the [annotables](https://github.com/stephenturner/annotables) package.
 
 
