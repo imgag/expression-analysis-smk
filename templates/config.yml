@@ -27,7 +27,7 @@ de_filter:
 
 model: "~ group"
 
-exclude genes:
+exclude_genes:
 
 exclude_genes_not_matching:
 
