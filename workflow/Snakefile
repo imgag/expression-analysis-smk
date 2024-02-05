@@ -41,6 +41,9 @@ include: "rules/expr_tables.smk"
 include: "rules/expr_plots.smk"
 include: "rules/diff_expr.smk"
 
+ruleorder: make_count_table > make_count_table_tx
+if config["transcript_level"]:
+    ruleorder: make_count_table_tx > make_count_table
 
 rule all:
     input:

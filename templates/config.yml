@@ -1,6 +1,7 @@
 samples: metadata.tsv
 contrasts: contrasts.tsv
 annotation: na.tsv # use auto generated annotation
+transcript_level: false
 
 build: grch38
 annotation_gene_id: ensgene

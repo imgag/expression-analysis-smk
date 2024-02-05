@@ -7,10 +7,18 @@ rule make_count_table:
     script:
         "../scripts/make_count_table.py"
 
+rule make_count_table_tx:
+    input:
+        config["samples"],
+    output:
+        counts="intermediate/counts.tsv",
+    script:
+        "../scripts/make_count_table_tx.py"
+
 
 rule expr_tables:
     input:
-        counts=rules.make_count_table.output,
+        counts="intermediate/counts.tsv",
         metadata=config["samples"],
         excluded_genes="intermediate/excluded_genes.txt",
     output:
