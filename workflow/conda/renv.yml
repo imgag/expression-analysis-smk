@@ -1,6 +1,5 @@
 name: R
 channels:
-  - r
   - conda-forge
   - bioconda
   - defaults

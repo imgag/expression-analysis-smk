@@ -1,6 +1,5 @@
 name: excel
 channels:
-  - r
   - conda-forge
   - bioconda
   - defaults
